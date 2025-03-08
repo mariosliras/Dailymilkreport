@@ -1,0 +1,131 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ffcc66, #ff9966);
+    text-align: center;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: #3d3d3d;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: Blue;
+    margin-bottom: 15px;
+}
+  
+h4 {
+     color: Red;
+     font-size: 15px;
+  }
+  
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+input {
+    width: 40%;
+    padding: 10px;
+    border: 4px solid #ff6600;
+    border-radius: 8px;
+    color: #f7140d;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+button {
+    border: none;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.store-btn {
+    background: #048a37;
+}
+
+.store-btn:hover {
+    background: #03421b;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.delete-btn {
+    background: #ff4444;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+}
+
+.wipe-btn {
+    background: #333;
+}
+
+.wipe-btn:hover {
+    background: #cc0000;
+}
+
+.report-btn {
+    background: #008CBA;
+}
+
+.report-btn:hover {
+    background: #005f73;
+}
+
+h2 {
+    margin-top: 20px;
+    color: blue;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 10px 0;
+}
+
+ul li {
+    background: #ffeecc;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 4px solid #ff6600;
+    font-size: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total-container {
+    background: #e2c465;
+    color: #0602e8;
+    padding: 10px;
+    border: 4px solid #ff6600;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 25px;
+    font-weight: bold;
+}
