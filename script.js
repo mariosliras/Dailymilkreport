@@ -3,8 +3,10 @@ updateUI();
 
 function storeMilk() {
     let milkInput = document.getElementById("milkInput").value;
+    
     if (milkInput === "" || isNaN(milkInput) || milkInput <= 0) {
         alert("Εισαγάγετε έγκυρη ποσότητα γάλακτος!");
+        
         return;
     }
 
@@ -16,6 +18,8 @@ function storeMilk() {
 
     milkData.push(entry);
     localStorage.setItem("milkData", JSON.stringify(milkData));
+     document.getElementById("milkInput").value = "";
+
     updateUI();
 }
 
