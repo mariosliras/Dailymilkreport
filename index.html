@@ -1,50 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Ημερήσιο  Γάλα</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milk Tracker</title>
+    <title>Καταγραφή Γάλακτος</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Προσθήκη Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>ΗΜΕΡΗΣΙΑ ΚΑΤΑΓΡΑΦΗ</h1>
-      <h4> By ΜΑΡΙΟΣ  ΛΥΡΑΣ @2025</h4>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Καταγραφή Γάλακτος</h1>
+            <div id="auth-status" class="auth-status">
+                <span id="user-email"></span>
+                <button id="auth-btn" class="auth-btn">Σύνδεση</button>
+            </div>
+        </header>
         
-        <div class="input-section">
-            <input type="number" id="milkInput" placeholder="Εισάγετε: kg">
-            <button class="store-btn" onclick="storeMilk()">Αποθήκευση</button>
+        <nav class="main-nav">
+            <button class="nav-btn active" data-panel="input-panel"><i class="fas fa-plus-circle"></i> Εισαγωγή</button>
+            <button class="nav-btn" data-panel="report-panel"><i class="fas fa-chart-bar"></i> Αναφορά</button>
+            <button class="nav-btn" data-panel="money-panel"><i class="fas fa-money-bill-wave"></i> Οικονομικά</button>
+        </nav>
+        
+        <div class="panel active-panel" id="input-panel">
+            <div class="input-group">
+                <label for="milk-amount">Ποσότητα Γάλακτος (kg):</label>
+                <input type="number" id="milk-amount" step="0.01" min="0" placeholder="Εισάγετε kg">
+            </div>
+            
+            <div class="input-group">
+                <label for="input-date">Ημερομηνία:</label>
+                <input type="date" id="input-date">
+            </div>
+            
+            <div class="input-group">
+                <label for="input-time">Ώρα:</label>
+                <input type="time" id="input-time">
+            </div>
+            
+            <div class="button-group">
+                <button id="save-btn" class="action-btn save-btn"><i class="fas fa-save"></i> Αποθήκευση</button>
+                <button id="delete-btn" class="action-btn delete-btn"><i class="fas fa-trash"></i> Διαγραφή</button>
+            </div>
+            
+            <div class="history-container">
+                <h3>Σημερινές Εισαγωγές</h3>
+                <div id="daily-entries"></div>
+                <div class="total-display">
+                    <span>Συνολική Ημερήσια:</span>
+                    <span id="daily-total">0.00 kg</span>
+                </div>
+            </div>
         </div>
-
-        <div class="button-group">
-            <button class="delete-btn" onclick="deleteLast()">Διαγραφή</button>
-            <button class="wipe-btn" onclick="clearHistory()">Καθαρισμός ιστορικού</button>
-            <button class="report-btn" onclick="generateReport()">Δημιουργία αναφοράς</button>
+        
+        <div class="panel" id="report-panel">
+            <div class="report-actions">
+            <button id="generate-report-btn" class="action-btn"><i class="fas fa-file-alt"></i> Δημιουργία Αναφοράς</button>
+            <button id="print-report-btn" class="action-btn"><i class="fas fa-print"></i> Εκτύπωση</button>
+            <button id="wipe-history-btn" class="action-btn delete-btn"><i class="fas fa-broom"></i> Εκκαθάριση</button>
+            <button id="backup-btn" class="action-btn"><i class="fas fa-cloud-upload-alt"></i> Αντίγραφο</button>
+            <button id="restore-btn" class="action-btn"><i class="fas fa-cloud-download-alt"></i> Επαναφορά</button>
         </div>
-
-        <h2>Ημερήσια καταχώρησει</h2>
-        <ul id="milkList"></ul>
-
-        <div class="total-container">
-            <h3>Σύνολο: <span id="totalMilk">0</span> kg</h3>
+    
+        <div id="report-content" class="report-content">
+        <!-- Η αναφορά θα εμφανιστεί εδώ -->
+    </div>
+</div>
+        
+        <div class="panel" id="money-panel">
+            <div class="input-group">
+                <label for="milk-price">Τιμή ανά kg (€):</label>
+                <input type="number" id="milk-price" step="0.01" min="0" placeholder="Εισάγετε τιμή">
+            </div>
+            
+            <div class="calculation-results">
+                <div class="result-row">
+                    <span>Συνολικό Γάλα:</span>
+                    <span id="total-milk">0.00 kg</span>
+                </div>
+                <div class="result-row">
+                    <span>Συνολική Αξία:</span>
+                    <span id="total-value">€0.00</span>
+                </div>
+            </div>
+            
+            <button id="calculate-btn" class="action-btn"><i class="fas fa-calculator"></i> Υπολογισμός</button>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
 </body>
 </html>
